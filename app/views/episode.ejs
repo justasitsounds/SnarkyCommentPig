@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	<script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/require.min.js"></script>
+    <script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/amdConfig.js"></script>
+    <script type="text/javascript" src="http://shared.ninemsn.com.au/share/short_cache/js/video/ninemsn.portal.common.video.loader-latest.min.js"></script>    
+    <script>
+
+    var tweetData = <%= remarks %>;
+    console.log(tweetData.length);
+
+    function positionCallback() {
+    	console.log('position: ' + window.player.get('POSITION'));
+    	setTimeout(positionCallback, 2000);
+    }
+    </script>
+  </head>
+  <body>
+
+  	<div id='bodyCenter'>
+  		<img src="/img/header.png">
+    	
+	    <div class='contentCenter'>
+		    <div class='vidCenter' id="player">
+			    <script type="text/javascript">
+			        (function () {
+			            var video = window.ninemsn.portal.common.video;
+
+			            video.ready(function () {
+			                window.player = new video.Player({
+			                    account: video.enumerations.account.ninemsnCatchup,
+			                    adapter: video.enumerations.player.adapter.Brightcove,
+			                    outputLocation: 'player',
+			                    data: {
+			                        method: video.enumerations.data.method.ID,
+			                        filter: {
+			                            id: '2630968748001'
+			                        },
+			                    },
+			                    height: 585,
+			                    width: 1040,
+			                    ads: {
+				                    freewheel: {
+				                        serverUrl: 'http://5c264.v.fwmrm.net',
+				                        networkId: 377444,
+				                        siteSection: 'noAds'
+				                    }
+				                }
+			                });
+
+							window.player.on('video:playing', positionCallback);
+			            });
+
+			        } ());
+			    </script>
+			  </div>
+	    </div>
+
+	    <img src="/img/footer.png">
+		</div>
+
+  </body>
+</html>
