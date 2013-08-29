@@ -12,15 +12,20 @@
 
     var tweetData = null;
     
-	var dataLoaded = false;
+	  var dataLoaded = false;
 
-	$.ajax({
-	  url: '/data',
-	  success: function(data) {
-		  tweetData = data;
-		  dataLoaded = true;
-		}
-	});
+  	function setData(source){
+      $.ajax({
+        url: '/data?source='+ source,
+        success: function(data) {
+          tweetData = data;
+          dataLoaded = true;
+        }
+      });
+    }
+    
+    setData('snark');
+
     function positionCallback() {
     	if(!dataLoaded) return;
 
@@ -36,6 +41,7 @@
 
     var timeToLive = 5;
     var lastIndex = 0;
+
 	function findTweetAtPosition(pos) {
 		for (var i = 0; i < tweetData.length; i++) {
 			if(pos > tweetData[i].position && pos < tweetData[i].position + timeToLive)
@@ -54,7 +60,7 @@
 		};
 	}
 
-    </script>
+  </script>
 
   </head>
   <body>
@@ -98,6 +104,22 @@
 			        } ());
 			    </script>
 			</div>
+
+      
+      <img src="img/off.png" class="img-swap" />
+      <script>
+        $("img.img-swap").on('click', function() {            
+            if ($(this).attr("class") == "img-swap") {
+              this.src = this.src.replace("off","on");              
+              setData('sheep');
+            } else {
+              this.src = this.src.replace("on","off");              
+              setData('snark');
+            }
+            $(this).toggleClass("on");
+          });
+      </script>
+
 			<blockquote id="sheep" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
 				<p></p>
 			</blockquote>
