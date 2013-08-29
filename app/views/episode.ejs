@@ -3,14 +3,15 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/raphael-min.js"></script> 
 	<script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/require.min.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/amdConfig.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/short_cache/js/video/ninemsn.portal.common.video.loader-latest.min.js"></script>    
 
     <script>
 
-    var tweetData = <%= remarks %>;
-    console.log(tweetData.length);
+    //var tweetData = <%= remarks %>;
+    //console.log(tweetData.length);
 
     function positionCallback() {
     	console.log('position: ' + window.player.get('POSITION'));
@@ -59,9 +60,53 @@
 			        } ());
 			    </script>
 			  </div>
+			  <div id="seats">
+			  	<div id="sheep">			  		
+			  	</div>
+			  	<div id="pig">			  		
+			  	</div>
+			  </div>
 	    </div>
 
 	    <img src="/img/footer.png">
 		</div>
+		<script type="text/javascript">
+
+		(function(){
+			window.onload = function(){}
+			var paper = Raphael("pig", 40, 40);
+			//var mouth = paper.path("M 2,2 10,2 9,5 c 0,0 -4,0 -5,-0.4 -1,-0.8 -2.5,-1.4 -2.5,-1.4 z");
+
+			var _scale = 4.2
+			var _point = function(x,y){
+				return '' + _scale * x + ',' + _scale * y + ' ';
+			};
+			var mouthpath = 'M ' + _point(2,1) + ' L ' + _point(7,1) +_point(7,3.5) + _point(4,3.5) + _point(2.5,2.5) + 'z';
+			console.log(mouthpath);
+			var mouth = paper.path(mouthpath);
+			mouth.attr({fill:"black"});
+			
+			var mouthopen = false
+			mouth.click(function(){
+				if(mouthopen){
+					this.animate({transform: "T" + _point(0,0) + "r0," + _point(9,3)}, 100, "back-out");
+					console.log("r0," + _point(9,0));
+				}else{
+					this.animate({transform: "T" + _point(0.3,1.2) + "r-35," + _point(9,3)}, 80, "back-in");
+				}
+				mouthopen = !mouthopen;
+				
+			});
+			//var transform = Raphael.transform('R-45 10 2');
+			//mouth
+  
+    //mouth.animate({rotation: 360}, 2000, 'bounce');  
+
+			//mouth.animate({rotation: 360}, 2000, 'bounce');  
+
+
+		}());
+
+		</script>
   </body>
 </html>

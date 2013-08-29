@@ -19,12 +19,48 @@ a {
 	margin-right: auto;
 	width: 0.86em;
 	margin: 30px 0 30px 0;
+
 }
 
 .contentCenter {
 	padding-left: 80px;
+	position: relative;
 }
 
-
-
+#seats{
+	background-image:url('../img/mst3k_overlay_sized.png');
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	position:absolute;
+	height:200px;
+	bottom:0px;
+	width:1040px;
+	line-height: 0px;
+}
+#pig{
+	background-image:url('../img/pig_silhouette.png');
+	position:absolute;
+	bottom:0px;
+	overflow: hidden;
+	right:120px;
+	height:152px;
+	width:174px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+#sheep{
+	background-image:url('../img/sheep.png');
+	position:absolute;
+	bottom:0px;
+	overflow: hidden;
+	left:120px;
+	height:152px;
+	width:174px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+#pig svg{
+	margin-top:45px;
+	margin-left:5px;
+}
 
