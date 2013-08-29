@@ -1,4 +1,0 @@
-SnarkyCommentPig
-================
-
-snarky the comment
