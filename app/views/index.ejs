@@ -6,6 +6,20 @@
 	<script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/require.min.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/amdConfig.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/short_cache/js/video/ninemsn.portal.common.video.loader-latest.min.js"></script>    
+    <script>
+    var isplaying = true;
+    function positionCallback() {
+    	
+    	if(!isplaying) return;
+
+    	isplaying = true;
+    	console.log('position: ' + window.player.get('POSITION'));
+    	setTimeout(positionCallback, 2000);
+    }
+    function clearCallback() {
+    	isplaying = false;
+    }    
+    </script>
   </head>
   <body>
 
@@ -39,7 +53,11 @@
 				                    }
 				                }
 			                });
+
+							window.player.on('video:playing', positionCallback);
+
 			            });
+
 			        } ());
 			    </script>
 			  </div>
