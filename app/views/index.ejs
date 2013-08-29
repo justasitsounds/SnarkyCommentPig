@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+	<script src="http://catchup.ninemsn.com.au/share/long_cache/js/thirdpartyframeworks/jquery/jquery-1.6.2.min.js"></script>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+	<div style="display:none">
+
+	</div>
+
+
+<!--
+By use of this code snippet, I agree to the Brightcove Publisher T and C 
+found at https://accounts.brightcove.com/en/terms-and-conditions/. 
+-->
+
+<script language="JavaScript" type="text/javascript" src="http://admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+
+
+
+
+
+<!-- 
+This script tag will cause the Brightcove Players defined above it to be created as soon
+as the line is read by the browser. If you wish to have the player instantiated only after
+the rest of the HTML is processed and the page load is complete, remove the line.
+-->
+<script type="text/javascript">brightcove.createExperiences();</script>
+
+<script>
+	
+	function eventTriggered(event)
+	{
+		//console.log("Event fired: " + event.type);	
+		$("#log").append("Event fired: " + event.type + "<br>");
+	}
+	
+	function myExperience_readyCallback()
+	{
+		var adModule = brightcove.api.getExperience('myExperience').getModule(window.brightcove.api.modules.APIModules.ADVERTISING);
+		var playerModule = brightcove.api.getExperience('myExperience').getModule(window.brightcove.api.modules.APIModules.VIDEO_PLAYER);
+			
+		playerModule.addEventListener(window.brightcove.api.events.MediaEvent.BEGIN, eventTriggered);
+	    playerModule.addEventListener(window.brightcove.api.events.MediaEvent.CHANGE, eventTriggered);
+	    playerModule.addEventListener(window.brightcove.api.events.MediaEvent.COMPLETE, eventTriggered);
+		playerModule.addEventListener(window.brightcove.api.events.MediaEvent.ERROR, eventTriggered);
+		playerModule.addEventListener(window.brightcove.api.events.MediaEvent.PLAY, eventTriggered);
+		//playerModule.addEventListener(window.brightcove.api.events.MediaEvent.PROGRESS, eventTriggered);
+		playerModule.addEventListener(window.brightcove.api.events.MediaEvent.STOP, eventTriggered);
+		playerModule.addEventListener(window.brightcove.api.events.MediaEvent.SEEK_NOTIFY, eventTriggered);
+			
+		adModule.addEventListener(window.brightcove.api.events.AdEvent.START, eventTriggered);			
+		adModule.addEventListener(window.brightcove.api.events.AdEvent.COMPLETE, eventTriggered);
+		
+	}
+    
+  
+
+</script>
+
+<div id="log"></div>
+<!-- End of Brightcove Player -->	
+
+  </body>
+</html>
