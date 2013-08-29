@@ -8,28 +8,35 @@
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/short_cache/js/video/ninemsn.portal.common.video.loader-latest.min.js"></script>    
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  	<div id='bodyCenter'>
+  		<img src="/img/header.png">
+    	
+	    <div class='contentCenter'>
+		    <div class='vidCenter' id="player">
+			    <script type="text/javascript">
+			        (function () {
+			            var video = window.ninemsn.portal.common.video;
 
-	    <div id="player"></div>
-	    <script type="text/javascript">
-	        (function () {
-	            var video = window.ninemsn.portal.common.video;
-
-	            video.ready(function () {
-	                window.player = new video.Player({
-	                    account: video.enumerations.account.ninemsnCatchup,
-	                    adapter: video.enumerations.player.adapter.Brightcove,
-	                    outputLocation: 'player',
-	                    data: {
-	                        method: video.enumerations.data.method.ID,
-	                        filter: {
-	                            id: '2630968748001'
-	                        }
-	                    }
-	                });
-	            });
-	        } ());
-	    </script>
+			            video.ready(function () {
+			                window.player = new video.Player({
+			                    account: video.enumerations.account.ninemsnCatchup,
+			                    adapter: video.enumerations.player.adapter.Brightcove,
+			                    outputLocation: 'player',
+			                    data: {
+			                        method: video.enumerations.data.method.ID,
+			                        filter: {
+			                            id: '2630968748001'
+			                        },
+			                    },
+			                    height: 585,
+			                    width: 1040
+			                });
+			            });
+			        } ());
+			    </script>
+			  </div>
+	    </div>
+	    <img src="/img/footer.png">
+	</div>
   </body>
 </html>
