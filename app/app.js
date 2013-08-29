@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var episode = require('./routes/episode');
 var user = require('./routes/user');
 var data = require('./routes/data');
 var assets = require('./routes/assets');
@@ -31,6 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/episode', episode.episode);
 app.get('/users', user.list);
 app.get('/data', data.list);
 app.get('/assets', assets.get);
