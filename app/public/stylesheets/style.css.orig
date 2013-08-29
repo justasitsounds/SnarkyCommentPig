@@ -32,10 +32,7 @@ img {
 	position: relative;
 }
 
-#becauseItNeedsFloats
-{
-	float: left;
-}
+<<<<<<< HEAD
 #seats{
 	background-image:url('../img/mst3k_overlay_sized.png');
 	background-repeat: repeat-x;
@@ -72,8 +69,14 @@ img {
 	margin-top:45px;
 	margin-left:5px;
 }
+=======
+#becauseItNeedsFloats
+{
+	float: left;
+}
 
 
 
 
+>>>>>>> 735893978b1f410818100eeec543f00bcff28ced
 

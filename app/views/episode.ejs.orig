@@ -3,17 +3,25 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+<<<<<<< HEAD
     <script type="text/javascript" src="/javascripts/raphael-min.js"></script> 
+=======
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+>>>>>>> 735893978b1f410818100eeec543f00bcff28ced
 	<script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/require.min.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/com/js/common/amdConfig.js"></script>
     <script type="text/javascript" src="http://shared.ninemsn.com.au/share/short_cache/js/video/ninemsn.portal.common.video.loader-latest.min.js"></script>    
 
     <script>
 
+<<<<<<< HEAD
+    //var tweetData = <%= remarks %>;
+    //console.log(tweetData.length);
+=======
     var tweetData = null;
     
 	var dataLoaded = false;
+>>>>>>> 735893978b1f410818100eeec543f00bcff28ced
 
 	$.ajax({
 	  url: '/data',
@@ -98,6 +106,15 @@
 
 			        } ());
 			    </script>
+<<<<<<< HEAD
+			  </div>
+			  <div id="seats">
+			  	<div id="sheep">			  		
+			  	</div>
+			  	<div id="pig">			  		
+			  	</div>
+			  </div>
+=======
 			</div>
 			<blockquote id="sheep" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
 				<p></p>
@@ -143,13 +160,7 @@
 
 			</style>
 
-			  </div>
-			  <div id="seats">
-			  	<div id="sheep">			  		
-			  	</div>
-			  	<div id="pig">			  		
-			  	</div>
-			  </div>
+>>>>>>> 735893978b1f410818100eeec543f00bcff28ced
 	    </div>
 
 	    <img src="/img/footer.png">
