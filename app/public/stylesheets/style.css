@@ -18,6 +18,7 @@ img {
 	margin-right: auto;
 	width: 1200px;
 	margin: 0 auto 0 auto;
+	position: relative;
 }
 .vidCenter {
 	margin-left: auto;
@@ -46,7 +47,7 @@ img {
 	width:1040px;
 	line-height: 0px;
 }
-#pig{
+#piggy{
 	background-image:url('../img/pig_silhouette.png');
 	position:absolute;
 	bottom:0px;
@@ -57,7 +58,7 @@ img {
 	background-repeat: no-repeat;
 	background-position: top left;
 }
-#sheep{
+#sheepy{
 	background-image:url('../img/sheep.png');
 	position:absolute;
 	bottom:0px;
