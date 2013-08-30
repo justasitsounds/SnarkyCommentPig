@@ -1,0 +1,82 @@
+body {
+  margin: 0 auto 0 auto;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #EBEBEB;
+
+}
+a {
+  color: #000000;
+}
+
+img {
+	padding: 0;
+	margin: 0;
+}
+
+#bodyCenter {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+	margin: 0 auto 0 auto;
+}
+.vidCenter {
+	margin-left: auto;
+	margin-right: auto;
+	width: 0.86em;
+	margin: 30px 0 30px 0;
+
+}
+
+.contentCenter {
+	padding-left: 80px;
+	position: relative;
+}
+
+<<<<<<< HEAD
+#seats{
+	background-image:url('../img/mst3k_overlay_sized.png');
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	position:absolute;
+	height:200px;
+	bottom:0px;
+	width:1040px;
+	line-height: 0px;
+}
+#pig{
+	background-image:url('../img/pig_silhouette.png');
+	position:absolute;
+	bottom:0px;
+	overflow: hidden;
+	right:120px;
+	height:152px;
+	width:174px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+#sheep{
+	background-image:url('../img/sheep.png');
+	position:absolute;
+	bottom:0px;
+	overflow: hidden;
+	left:120px;
+	height:152px;
+	width:174px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+#pig svg{
+	margin-top:45px;
+	margin-left:5px;
+}
+=======
+#becauseItNeedsFloats
+{
+	float: left;
+}
+
+
+
+
+>>>>>>> 735893978b1f410818100eeec543f00bcff28ced
+
