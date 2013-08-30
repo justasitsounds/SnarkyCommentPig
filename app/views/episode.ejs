@@ -54,7 +54,7 @@
 
     	for (var i = 0; i < tweetData.length; i++) {
 
-			if(pos > tweetData[i].position && pos < tweetData[i].position + 3)
+			if(pos > tweetData[i].position && pos < tweetData[i].position + 4)
 			{
 	    		if(lastIndex == i) return;
 
@@ -158,7 +158,7 @@
 			    if ($(this).attr("class") == "img-swap") {
 			      this.src = this.src.replace("off","on");              
 			      setData('friend');
-			      $("#seats").hide();
+			      $("#seats").stop().hide();
 			      lastIndex = -1;
 			    } else {
 			      this.src = this.src.replace("on","off");              
