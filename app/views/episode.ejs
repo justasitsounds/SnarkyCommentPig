@@ -37,48 +37,55 @@
 
     function resetCallback() {
     	console.log('resetCallback');
-    	$("#pig, #sheep").hide();
+    	$(".pig, .sheep").hide();
     	lastIndex = 0;
     }
 
     var timeToLive = 5;
     var lastIndex = -1;
-
+	var isFriendSource = fasle;
 	function findTweetAtPosition(pos) {
 
-		var isFriendSource = $("img.img-swap").hasClass('on');       
+		isFriendSource = $("img.img-swap").hasClass('on');       
     
-	    var friendIds = ['#friend1', '#friend2'];
-	    var snarkIds = ['#sheep', '#pig'];
+	    var friendIds = ['.friend1', '.friend2'];
+	    var snarkIds = ['.sheep', '.pig'];
 	    var currentSources = null;
 
     	for (var i = 0; i < tweetData.length; i++) {
 
-			if(pos > tweetData[i].position && pos < tweetData[i].position + timeToLive)
+			if(pos > tweetData[i].position && pos < tweetData[i].position + 3)
 			{
-				if(isFriendSource){
-		            currentSources = friendIds;
-		            $(snarkIds[0]).fadeOut();
-		            $(snarkIds[1]).fadeOut();
-		        }else{
-		            currentSources = snarkIds;
-		            $(friendIds[0]).fadeOut();
-		            $(friendIds[1]).fadeOut();
-	    		}
+	    		if(lastIndex == i) return;
+
 		        lastIndex =  i;
 
+				if(isFriendSource){
+		            currentSources = friendIds;
+		        }else{
+		            currentSources = snarkIds;
+	    		}
+
 		        var id = (lastIndex % 2 == 0) ? currentSources[0] : currentSources[1];
-		        var otherid = (lastIndex % 2 == 0) ? currentSources[1] : currentSources[0];
-		        var other = $(otherid);
 		        var item = $(id);
-		        other.fadeOut();
 		       
-		        item.fadeIn();
+		        item.stop().fadeIn().delay(4000).fadeOut();
 		        
-		        item.find("> img").attr('src',tweetData[i].profile_image_url);
-		        item.find("> h3").text(tweetData[i].screen_name);
+		        if(isFriendSource) {
+		        	item.addClass('friendPos');
+		        	item.find("> img").show().attr('src',tweetData[i].profile_image_url);
+		        	item.find("> a").show().attr('href','https://twitter.com/' + tweetData[i].screen_name);
+		        	item.find("> h3").text(tweetData[i].name);
+		        }
+		        else
+		        {
+		        	item.removeClass('friendPos');
+		        	item.find("> img, > a").hide();
+		        	item.find("> h3").text(tweetData[i].screen_name);
+		        }
+		        
 		        item.find("> p").text(tweetData[i].tweet);                                 
-		        item.find("> a").attr('href','https://twitter.com/' + tweetData[i].screen_name);
+		        
 		    }
 		}
 	}
@@ -86,8 +93,10 @@
 	function initChairsAndAnimals() {
 
 		$("#seats").fadeIn();
-		$("#player, #seats, #pig, #sheep").mouseenter(function() { $("#seats").hide(); });
-		$("#player").mouseleave(function() { $("#seats").fadeIn(1000); });
+		$("#player, #seats, .pig, .sheep").mouseenter(function() { $("#seats").hide(); });
+		$("#player, #seats, .pig, .sheep").mouseleave(function() { 
+			if(!isFriendSource)
+				$("#seats").fadeIn(1000); });
 
 	}
 
@@ -136,17 +145,26 @@
 			    </script>
 			</div>
 
-			<img src="img/snarkLabel.png" /> 
-			<img src="img/off.png" class="img-swap" />
-			<img src="img/friendsLabel.png" />
+			<div class='buttonImgs' id="becauseItNeedsToFloat">
+					<img src="/img/disableCommentary.png" /> 
+					<span id='toggleStuff'>
+			      <img src="img/snarkLabel.png" /> 
+			      <img src="img/off.png" class="img-swap" />
+			      <img src="img/friendsLabel.png" />
+			    </span>
+			</div>
 			<script>
 			$("img.img-swap").on('click', function() {            
 			    if ($(this).attr("class") == "img-swap") {
 			      this.src = this.src.replace("off","on");              
-			      setData('sheep');
+			      setData('friend');
+			      $("#seats").hide();
+			      lastIndex = -1;
 			    } else {
 			      this.src = this.src.replace("on","off");              
 			      setData('snark');
+			      $("#seats").fadeIn(1000);
+			      lastIndex = -1;
 			    }
 			    $(this).toggleClass("on");
 			  });
@@ -162,26 +180,19 @@
 
 		  		</div>
 		  	</div>
-			<blockquote id="sheep" class="example-twitter">
+			<blockquote class="example-twitter sheep friend1">
+				<img src="" />
 				<h3></h3>
 				<p></p>
+				<a>link</a>  
 			</blockquote>			  
-			<blockquote id="pig" class="example-twitter">
+			<blockquote class="example-twitter pig friend2">
+				<img src="" />
 				<h3></h3>
 				<p></p>
+				<a>link</a>  
 			</blockquote>	
-
-	      <blockquote id="friend1" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
-	        <img src="" />
-	        <p></p>
-	        <a>link</a>    
-	      </blockquote>
-
-	      <blockquote id="friend2" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
-	        <img />
-	        <p></p>
-	        <a>link</a>        
-	      </blockquote>									
+							
 
 	    </div>
 

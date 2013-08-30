@@ -93,7 +93,7 @@ img {
 width: 300px;
 position: relative;
 padding: 15px;
-margin: 100px 0 0.5em;
+margin: auto 0 0.5em;
 color: #333;
 background: #ccc;
 -webkit-border-radius: 10px;
@@ -137,11 +137,15 @@ font-size: 2em;
 color:#000;
 }
 
-#pig {display: none; position: absolute; bottom:210px; right: 270px;}
-#sheep { display: none; position: absolute; bottom:210px; left:270px; }
-#pig:after { right: 70px; }
-#sheep:after {	left: 60px; }
+.pig {display: none; position: absolute; bottom:210px; right: 270px;}
+.sheep { display: none; position: absolute; bottom:210px; left:270px; }
+.pig:after { right: 70px; }
+.sheep:after {	left: 60px; }
 
+.friend1 { display: none; position: absolute; bottom:210px; left:270px; }
+.friend2 {display: none; position: absolute; bottom:210px; right: 270px;}
 
-        #friend1 { display: none; position: absolute; top:200px; left:10px; }
-        #friend2 {display: none; position: absolute; top:200px; right: 20px;}
+.friendPos { bottom:80px; }
+.friendPos:after {
+	display: none;
+}
