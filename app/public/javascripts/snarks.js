@@ -8,61 +8,152 @@ var snarks = function(){
 		return '' + _scale * x + ',' + _scale * y + ' ';
 	};
 
+	this.randomInt = function(min, max) {
+	  return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+
+	this.twitchlimb = function(limb, setx,sety, rotatex, rotatey,callback){
+			var cb = callback || function(){};
+			var translatestring = "t" + setx + "," + sety;
+			var rotateorigin = "" + rotatex + "," + rotatey;
+			
+			var rotate = function(dir){
+				return "r" + 10 * dir + "," + rotateorigin;
+			}
+			var twitchin = function(){
+				limb.animate({transform:translatestring + rotate(1)},randomInt(20,200),"<>",cb);	
+			}
+			limb.animate({transform:translatestring + rotate(-1)},randomInt(20,200),"<>",twitchin);	
+		};
+
 	this.pig = function(){
 		var set = paper.set();
-		var mouthpart = paper.path('M ' + _point(3,1+8) + ' L ' + _point(7,1+8) + _point(7,3.5+8) + _point(4,3.5+8) + _point(2.5,2.5+8) + 'z');
+		var _mouthy = 8.8;
+		var _mouthx = 0.1;
+		var mouthpart = paper.path('M ' + _point(3+_mouthx,1+_mouthy) + ' L ' + _point(7+_mouthx,1+_mouthy) + _point(7+_mouthx,3.5+_mouthy) + _point(4+ _mouthx,3.5+_mouthy) + _point(2.5+ _mouthx,2.5+_mouthy) + 'z');
 		mouthpart.attr({fill:"black"});
 
+		var _pigx = 750
+		var _pigy = 49;
 		var mouthopen = false;
-		this.talk = function(){
+		
+		this.closemouth = function(callback){
+			mouthpart.animate({transform: "t" + (_pigx *1 + 3)+ "," + (_pigy*1 + 4) + "r0," + _point(9,3+_mouthy)}, randomInt(100,400), "back-out",callback);
+		}
+		this.openmouth = function(callback){
+			var openanim = "t" + (_pigx*1 + 12) + "," + (_pigy*1 + 8) + "r-35," + _point(9,3+_mouthy);
+
+			mouthpart.animate({transform: openanim}, randomInt(80,200), "back-in",callback);
+		}
+		this.talk = function(callback){
 			if(mouthopen){
-				mouthpart.animate({transform: "T" + _point(0,0) + "r0," + _point(9,3)}, 100, "back-out");
-				console.log("r0," + _point(9,0));
+				closemouth(callback);
 			}else{
-				mouthpart.animate({transform: "T" + _point(0.3,1.2) + "r-35," + _point(9,3)}, 80, "back-in");
+				openmouth(callback)
 			}
 			mouthopen = !mouthopen;
 
 		};
 
-		var body = paper.image("img/pig/pig_zombietorso.png",20,70,101,94);
+		this.yakka = function(){
+
+			talk(function(){talk(function(){talk(function(){talk()})});});
+			
+		};
+
+		var body = paper.image("img/pig/pig_zombietorso.png",24,70,101,94);
 		var head = paper.image("img/pig/pig_head.png",10,0,126,84);
+		var lefthand = paper.image("img/pig/pig_lefthand.png",14,80,31,27);
+		var righthand = paper.image("img/pig/pig_righthand.png",114,72,38,26);
+		var tail = paper.image("img/pig/pig_tail.png",112,98,41,34);
 
-		set.push(mouthpart,body,head);
+		set.push(mouthpart,body,head,lefthand,righthand,tail);
+		set.transform("t" + _pigx + "," + _pigy);
+		
 
+		this.twitchtail = function(){
+			twitchlimb(tail,_pigx,_pigy,110,96);
+		}
+
+
+		this.twitchhand = function(){
+			twitchlimb(lefthand,_pigx,_pigy,(14+31), (80 + 27));
+				
+		}
+
+		this.twitchhead = function(){
+			twitchlimb(head,_pigx,_pigy,73,84);
+			twitchlimb(mouthpart,_pigx,_pigy,73,84);
+		}
+
+		this.slowTwitch = function(){
+			
+			var rand = randomInt(1,10);
+			if(rand > 6){
+				twitchtail();
+			}
+			if(rand > 4 && rand < 8){
+				twitchhand();
+			}
+		}
+
+		timeoutID = window.setInterval(this.slowTwitch, 1500);
 
 		
 		return this;
 	};
 	
+	this.sheep = function(){
+
+		var set = paper.set();
+
+		var _sheepx = 120;
+		var _sheepy = 44;
+		var mouthopen = false;
+
+		var mouth = paper.image("img/sheep/sheep_jaw.png",108,42,31,19);
+		var body = paper.image("img/sheep/sheep_body.png",0,52,135,145);
+		var head = paper.image("img/sheep/sheep_head.png",30,10,111,60);
+		var ear = paper.image("img/sheep/sheep_ear.png",21,1,36,33);
+
+		set.push(mouth,body,head,ear);
+		set.transform("t" + _sheepx + "," + _sheepy);
+
+		this.yak = function(){
+			twitchlimb(mouth,_sheepx,_sheepy,108,42,function(){
+				twitchlimb(mouth,_sheepx,_sheepy,108,42);
+			});
+		}
+
+		
+		this.twitchear = function(){
+			twitchlimb(ear,_sheepx,_sheepy,57,34);
+		}
+
+		this.twitchhead = function(){
+			twitchlimb(head,_sheepx,_sheepy,60,60);
+			twitchlimb(mouth,_sheepx,_sheepy,60,60);
+			twitchlimb(ear,_sheepx,_sheepy,60,60);
+		}
+
+		this.slowTwitch = function(){
+			var rand = randomInt(1,10);
+			if(rand > 4 && rand < 8){
+				twitchear();
+			}
+			if(rand>8){
+				//twitchhead();
+			}
+		}
+		//this.twitchhead();
+		timeoutID = window.setInterval(this.slowTwitch, 1200);
+
+		return this;
+	}
+
 	return this;
 
 };
 
-
-// var paper = Raphael("seats", 1040,240);
-// //var mouth = paper.path("M 2,2 10,2 9,5 c 0,0 -4,0 -5,-0.4 -1,-0.8 -2.5,-1.4 -2.5,-1.4 z");
-
-// var _scale = 4.2
-// var _point = function(x,y){
-// 	return '' + _scale * x + ',' + _scale * y + ' ';
-// };
-// var mouthpath = 'M ' + _point(2,1) + ' L ' + _point(7,1) +_point(7,3.5) + _point(4,3.5) + _point(2.5,2.5) + 'z';
-// console.log(mouthpath);
-// var mouth = paper.path(mouthpath);
-// mouth.attr({fill:"black"});
-
-// var mouthopen = false
-// mouth.click(function(){
-// 	if(mouthopen){
-// 		this.animate({transform: "T" + _point(0,0) + "r0," + _point(9,3)}, 100, "back-out");
-// 		console.log("r0," + _point(9,0));
-// 	}else{
-// 		this.animate({transform: "T" + _point(0.3,1.2) + "r-35," + _point(9,3)}, 80, "back-in");
-// 	}
-// 	mouthopen = !mouthopen;
-	
-// });
-	  
 
 
