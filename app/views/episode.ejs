@@ -103,10 +103,14 @@
 			        } ());
 			    </script>
 			</div>
-			<img src="/img/disableCommentary.png" /> <br />
-      <img src="img/snarkLabel.png" /> 
-      <img src="img/off.png" class="img-swap" />
-      <img src="img/friendsLabel.png" />
+			<div class='buttonImgs' id="becauseItNeedsToFloat">
+				<img src="/img/disableCommentary.png" /> 
+				<span id='toggleStuff'>
+		      <img src="img/snarkLabel.png" /> 
+		      <img src="img/off.png" class="img-swap" />
+		      <img src="img/friendsLabel.png" />
+		    </span>
+      </div>
       <script>
         $("img.img-swap").on('click', function() {            
             if ($(this).attr("class") == "img-swap") {
