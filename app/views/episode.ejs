@@ -42,19 +42,16 @@
 
     var timeToLive = 5;
     var lastIndex = 0;
-
 	function findTweetAtPosition(pos) {
 		for (var i = 0; i < tweetData.length; i++) {
 			if(pos > tweetData[i].position && pos < tweetData[i].position + timeToLive)
 			{
+				if(lastIndex == i) return;
 				lastIndex =  i;
 
 				var id = (lastIndex % 2 == 0) ? 'pig' : 'sheep';
-				var otherid = (lastIndex % 2 == 0) ? 'sheep' : 'pig';
-				var other = $("#" + otherid);
 				var item = $("#" + id);
-				other.fadeOut();
-				item.fadeIn();
+				item.fadeIn().delay(timeToLive * 1000).fadeOut();
 				item.find("> p").text(tweetData[i].tweet);
 
 			}
@@ -99,7 +96,7 @@
 			                });
 
 							window.player.on('video:playing', positionCallback);
-							window.player.on('video:seek', resetCallback);
+							window.player.on('video:playing', function() { $("#seats").fadeIn(); });
 			            });
 
 			        } ());
@@ -211,7 +208,8 @@
 
 			//mouth.animate({rotation: 360}, 2000, 'bounce');  
 
-
+			$("#player, #seats, #pig, #sheep").mouseenter(function() { $("#seats").hide(); });
+			$("#player").mouseleave(function() { $("#seats").show(); });
 		}());
 
 		</script>

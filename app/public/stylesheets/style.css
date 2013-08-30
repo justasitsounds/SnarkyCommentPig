@@ -38,6 +38,7 @@ img {
 	float: left;
 }
 #seats{
+	display: none;
 	background-image:url('../img/mst3k_overlay_sized.png');
 	background-repeat: repeat-x;
 	background-position: bottom left;
