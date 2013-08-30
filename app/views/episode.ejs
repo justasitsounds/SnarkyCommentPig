@@ -42,7 +42,7 @@
     }
 
     var timeToLive = 5;
-    var lastIndex = 0;
+    var lastIndex = -1;
 	function findTweetAtPosition(pos) {
 		for (var i = 0; i < tweetData.length; i++) {
 			if(pos > tweetData[i].position && pos < tweetData[i].position + timeToLive)
@@ -50,13 +50,22 @@
 				if(lastIndex == i) return;
 				lastIndex =  i;
 
-				var id = (lastIndex % 2 == 0) ? 'pig' : 'sheep';
+				var id = (lastIndex % 2 == 0) ? 'sheep' : 'pig';
 				var item = $("#" + id);
 				item.fadeIn().delay(timeToLive * 1000).fadeOut();
+				item.find("> h3").text(tweetData[i].screen_name);
 				item.find("> p").text(tweetData[i].tweet);
 
 			}
 		};
+	}
+
+	function initChairsAndAnimals() {
+
+		$("#seats").fadeIn();
+		$("#player, #seats, #pig, #sheep").mouseenter(function() { $("#seats").hide(); });
+		$("#player").mouseleave(function() { $("#seats").fadeIn(1000); });
+
 	}
 
   </script>
@@ -97,129 +106,55 @@
 			                });
 
 							window.player.on('video:playing', positionCallback);
-							window.player.on('video:playing', function() { $("#seats").fadeIn(); });
+							window.player.on('video:playing', initChairsAndAnimals);
 			            });
 
 			        } ());
 			    </script>
 			</div>
 
-      <img src="img/snarkLabel.png" /> 
-      <img src="img/off.png" class="img-swap" />
-      <img src="img/friendsLabel.png" />
-      <script>
-        $("img.img-swap").on('click', function() {            
-            if ($(this).attr("class") == "img-swap") {
-              this.src = this.src.replace("off","on");              
-              setData('sheep');
-            } else {
-              this.src = this.src.replace("on","off");              
-              setData('snark');
-            }
-            $(this).toggleClass("on");
-          });
-      </script>
+			<img src="img/snarkLabel.png" /> 
+			<img src="img/off.png" class="img-swap" />
+			<img src="img/friendsLabel.png" />
+			<script>
+			$("img.img-swap").on('click', function() {            
+			    if ($(this).attr("class") == "img-swap") {
+			      this.src = this.src.replace("off","on");              
+			      setData('sheep');
+			    } else {
+			      this.src = this.src.replace("on","off");              
+			      setData('snark');
+			    }
+			    $(this).toggleClass("on");
+			  });
+			</script>
 
-			<blockquote id="sheep" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
-				<p></p>
-			</blockquote>
 
-			<blockquote id="pig" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
-				<p></p>
-			</blockquote>			
+			<div id="seats">
+			  	<div id="sheepy">	
 
-			<style>
-				.example-twitter {
-				width: 200px;
-				position: relative;
-				padding: 15px;
-				margin: 100px 0 0.5em;
-				color: #333;
-				background: #ccc;
-				-webkit-border-radius: 10px;
-				-moz-border-radius: 10px;
-				border-radius: 10px;
-				}	
-				
-				.example-twitter:before {
-				position: absolute;
-				top: -60px;
-				left: 0;
-				width: 155px;
-				height: 36px;
-				display: block;
-				}
-				.example-twitter p {
-				font-size: 14px;
-				line-height: 18px;
-				}
-
-				blockquote p {
-				margin: 0;
-				font-size: 2em;
-				}
-
-				#pig { display: none; position: absolute; top:300px; left:10px; }
-				#sheep {display: none; position: absolute; top:300px; right: 10px;}
-
-			</style>
-				<div id="seats">
-				  	<div id="sheepy">			  		
-				  	</div>
-				  	<div id="piggy">			  		
 			  	</div>
-			  
-			  </div>
-			  
+			  	<div id="piggy">	
+
+
+		  		</div>
+		  	</div>
+			<blockquote id="sheep" class="example-twitter">
+				<h3></h3>
+				<p></p>
+			</blockquote>			  
+			<blockquote id="pig" class="example-twitter">
+				<h3></h3>
+				<p></p>
+			</blockquote>							
 	    </div>
 
 	    <img src="/img/footer.png">
-		</div>
+	</div>
 		<script type="text/javascript">
 
-<<<<<<< HEAD
-		(function(){
-			window.onload = function(){}
-			var paper = Raphael("piggy", 40, 40);
-			//var mouth = paper.path("M 2,2 10,2 9,5 c 0,0 -4,0 -5,-0.4 -1,-0.8 -2.5,-1.4 -2.5,-1.4 z");
-
-			var _scale = 4.2
-			var _point = function(x,y){
-				return '' + _scale * x + ',' + _scale * y + ' ';
-			};
-			var mouthpath = 'M ' + _point(2,1) + ' L ' + _point(7,1) +_point(7,3.5) + _point(4,3.5) + _point(2.5,2.5) + 'z';
-			console.log(mouthpath);
-			var mouth = paper.path(mouthpath);
-			mouth.attr({fill:"black"});
-			
-			var mouthopen = false
-			mouth.click(function(){
-				if(mouthopen){
-					this.animate({transform: "T" + _point(0,0) + "r0," + _point(9,3)}, 100, "back-out");
-					console.log("r0," + _point(9,0));
-				}else{
-					this.animate({transform: "T" + _point(0.3,1.2) + "r-35," + _point(9,3)}, 80, "back-in");
-				}
-				mouthopen = !mouthopen;
-				
-			});
-			//var transform = Raphael.transform('R-45 10 2');
-			//mouth
-  
-    //mouth.animate({rotation: 360}, 2000, 'bounce');  
-
-			//mouth.animate({rotation: 360}, 2000, 'bounce');  
-
-			$("#player, #seats, #pig, #sheep").mouseenter(function() { $("#seats").hide(); });
-			$("#player").mouseleave(function() { $("#seats").show(); });
-		}());
-=======
-		//(function(){
 			var snark = snarks();
 			var pig = snark.pig();
-
-		//}());
->>>>>>> 1a03605bc1e9fdb3dc9cd1525d39c2ca1a85b656
 
 		</script>
   </body>

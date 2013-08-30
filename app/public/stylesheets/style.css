@@ -79,3 +79,55 @@ img {
 
 
 
+.example-twitter {
+width: 300px;
+position: relative;
+padding: 15px;
+margin: 100px 0 0.5em;
+color: #333;
+background: #ccc;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+opacity: .8;
+}	
+
+.example-twitter p {
+	font-size: 24px;
+	line-height: 32px;
+	font-style: italic;
+}
+
+.example-twitter:before {
+position: absolute;
+top: -60px;
+left: 0;
+width: 155px;
+height: 36px;
+display: block;
+}
+
+.example-twitter:after {
+content: "";
+position: absolute;
+bottom: -30px;
+border: 15px solid transparent;
+border-top-color: #ccc;
+display: block;
+width: 0;
+}
+.example-twitter h3 {
+	line-height: 32px;
+	font-size: 24px;
+	margin: 0;
+}
+blockquote p {
+margin: 0;
+font-size: 2em;
+color:#000;
+}
+
+#pig {display: none; position: absolute; bottom:210px; right: 270px;}
+#sheep { display: none; position: absolute; bottom:210px; left:270px; }
+#pig:after { right: 70px; }
+#sheep:after {	left: 60px; }
