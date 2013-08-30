@@ -44,7 +44,7 @@ img {
 	background-position: bottom left;
 	position:absolute;
 	height:200px;
-	bottom:0px;
+	bottom:64px;
 	width:1040px;
 	line-height: 0px;
 }
@@ -70,7 +70,7 @@ img {
 	background-repeat: no-repeat;
 	background-position: top left;
 }
-#pig svg{
+#piggy svg{
 	margin-top:45px;
 	margin-left:5px;
 }
