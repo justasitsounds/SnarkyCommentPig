@@ -43,21 +43,44 @@
 
     var timeToLive = 5;
     var lastIndex = -1;
+
 	function findTweetAtPosition(pos) {
-		for (var i = 0; i < tweetData.length; i++) {
+
+		var isFriendSource = $("img.img-swap").hasClass('on');       
+    
+	    var friendIds = ['#friend1', '#friend2'];
+	    var snarkIds = ['#sheep', '#pig'];
+	    var currentSources = null;
+
+    	for (var i = 0; i < tweetData.length; i++) {
+
 			if(pos > tweetData[i].position && pos < tweetData[i].position + timeToLive)
 			{
-				if(lastIndex == i) return;
-				lastIndex =  i;
+				if(isFriendSource){
+		            currentSources = friendIds;
+		            $(snarkIds[0]).fadeOut();
+		            $(snarkIds[1]).fadeOut();
+		        }else{
+		            currentSources = snarkIds;
+		            $(friendIds[0]).fadeOut();
+		            $(friendIds[1]).fadeOut();
+	    		}
+		        lastIndex =  i;
 
-				var id = (lastIndex % 2 == 0) ? 'sheep' : 'pig';
-				var item = $("#" + id);
-				item.fadeIn().delay(timeToLive * 1000).fadeOut();
-				item.find("> h3").text(tweetData[i].screen_name);
-				item.find("> p").text(tweetData[i].tweet);
-
-			}
-		};
+		        var id = (lastIndex % 2 == 0) ? currentSources[0] : currentSources[1];
+		        var otherid = (lastIndex % 2 == 0) ? currentSources[1] : currentSources[0];
+		        var other = $(otherid);
+		        var item = $(id);
+		        other.fadeOut();
+		       
+		        item.fadeIn();
+		        
+		        item.find("> img").attr('src',tweetData[i].profile_image_url);
+		        item.find("> h3").text(tweetData[i].screen_name);
+		        item.find("> p").text(tweetData[i].tweet);                                 
+		        item.find("> a").attr('href','https://twitter.com/' + tweetData[i].screen_name);
+		    }
+		}
 	}
 
 	function initChairsAndAnimals() {
@@ -146,7 +169,20 @@
 			<blockquote id="pig" class="example-twitter">
 				<h3></h3>
 				<p></p>
-			</blockquote>							
+			</blockquote>	
+
+	      <blockquote id="friend1" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
+	        <img src="" />
+	        <p></p>
+	        <a>link</a>    
+	      </blockquote>
+
+	      <blockquote id="friend2" class="example-twitter" cite="http://twitter.com/necolas/status/9880187933">
+	        <img />
+	        <p></p>
+	        <a>link</a>        
+	      </blockquote>									
+
 	    </div>
 
 	    <img src="/img/footer.png">

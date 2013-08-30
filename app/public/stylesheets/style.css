@@ -141,3 +141,7 @@ color:#000;
 #sheep { display: none; position: absolute; bottom:210px; left:270px; }
 #pig:after { right: 70px; }
 #sheep:after {	left: 60px; }
+
+
+        #friend1 { display: none; position: absolute; top:200px; left:10px; }
+        #friend2 {display: none; position: absolute; top:200px; right: 20px;}
