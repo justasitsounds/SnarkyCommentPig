@@ -104,19 +104,21 @@
 	}
 
 	
+  var initiated = false;
 
 	function initChairsAndAnimals() {
-		console.log("ffff");
-		$("#seats").fadeIn(function(){ 
-			console.log(document.getElementById("#seats"));
-			var snark = snarks();
-			window.pig = snark.pig();
-			window.sheep = snark.sheep();});
-		$("#player, #seats, .pig, .sheep").mouseenter(function() { $("#seats").hide(); });
-		$("#player, #seats, .pig, .sheep").mouseleave(function() { 
-			if(!isFriendSource)
-				$("#seats").fadeIn(1000); });
-
+		if(!initiated){
+  		$("#seats").fadeIn(function(){ 
+  			console.log(document.getElementById("#seats"));
+  			var snark = snarks();
+  			window.pig = snark.pig();
+  			window.sheep = snark.sheep();});
+  		$("#player, #seats, .pig, .sheep").mouseenter(function() { $("#seats").hide(); });
+  		$("#player, #seats, .pig, .sheep").mouseleave(function() { 
+  			if(!isFriendSource)
+  				$("#seats").fadeIn(1000); });
+      initiated = true;
+    }
 	}
 
   </script>
